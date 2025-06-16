@@ -1,14 +1,14 @@
 from fastapi import FastAPI
-from structure import Car
-from database import dataset, convert
+from app.structure import Car
+from app.database import dataset, convert
 from bson import ObjectId
 
 app = FastAPI()
 
 @app.post("/cars")
 def add(car:Car):
-    result = dataset.insert_one(car)  # Convert Car to dict and insert
-    return "Car has been added with ID" + str(result.inserted_id)      # Return the inserted ID
+    result = dataset.insert_one(car.model_dump())  
+    return "Car has been added with ID" + str(result.inserted_id)  
 
 @app.get("/cars")
 def get_all_cars():

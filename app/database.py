@@ -1,11 +1,12 @@
+import os
 from pymongo import MongoClient
 
-# Create a client connection
-client = MongoClient("mongodb://localhost:27017")
-db = client["car_database"]
-dataset = db["cars"]
+MONGO_URL = os.getenv("MONGO_URL", "mongodb://localhost:27017/car_database")
 
-# Serialize ObjectId and document into a dictionary
+client = MongoClient(MONGO_URL)
+dataset = client.get_database().get_collection("cars")
+
+
 
 def convert(car) :
     return {
