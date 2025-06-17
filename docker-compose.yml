@@ -16,7 +16,7 @@ services:
     build:
       context: .
       dockerfile: dockerfile
-    container_name: fastapi-app
+    container_name: car-app
     restart: always
     ports:
       - "8000:8000"

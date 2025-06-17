@@ -15,16 +15,9 @@ def get_all_cars():
     all = [convert(car) for car in dataset.find()]
     return all
 
-@app.get("/cars/specific")
-def get_car(id):
+
+@app.get("/specific")
+def get_one_car(id:str):
     car = dataset.find_one({"_id": ObjectId(id)})
     if car:
         return convert(car)
-    return "Car not found"
-
-@app.delete("/cars/delete")
-def delete_car(id):
-    result = dataset.delete_one({"_id": ObjectId(id)})
-    if result.deleted_count > 0:
-        return "Car deleted"
-    return "Car not found"
